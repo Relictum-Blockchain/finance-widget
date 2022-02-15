@@ -8,7 +8,7 @@ import headSection from "@/components/includes/head-section"
 import router from '@/router'
 import vueCustomElement from 'vue-custom-element'
 import config from "@/config"
-// import ""
+import VueMask from 'v-mask'
 import componentStyles from '!!raw-loader!stylus-loader!@/styl/main.styl';
 
 Vue.component("field", field);
@@ -21,6 +21,7 @@ Vue.config.productionTip = false
 Vue.prototype.$domain = config.domain;
 
 Vue.use(vueCustomElement)
+Vue.use(VueMask)
 
 widget.store = store
 widget.router = router

@@ -1,6 +1,6 @@
 export default {
   domain: "https://relictum.finance",
-  request: "https://dev.relictum.finance"
+  request: "https://dev.relictum.finance" 
 }
 
 // Requests

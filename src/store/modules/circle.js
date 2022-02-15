@@ -1,6 +1,7 @@
 import axios from "axios";
 import config from "@/config"
-import { readKey, createMessage, encrypt, atob, btoa } from "openpgp";
+import router from "@/router"
+import { readKey, createMessage, encrypt } from "openpgp";
 
 
 async function encyptData(publicKey, vr) {
@@ -20,7 +21,9 @@ export default {
     keyId: null,
     encryptedPayment: null,
     encryptedCard: null,
-    cvv: null
+    cvv: null,
+    cardNumber: null,
+    circleFormFields: {}
   },
   actions: {
     getCities(ctx) {
@@ -86,12 +89,75 @@ export default {
           cvv: ctx.getters.getCvv
       });
 
-      Promise.all([encryptedPayment, encryptedCard]).then(([encryptedPayment, encryptedCard]) => {
+      await Promise.all([encryptedPayment, encryptedCard]).then(([encryptedPayment, encryptedCard]) => {
         ctx.commit("setEncryptedPayment", btoa(encryptedPayment));
         ctx.commit("setEncryptedCard", btoa(encryptedCard));
       });
 
     },
+
+    async sendCircleForm(ctx, fields) {
+      ctx.commit("setLoading", {
+        name: "sendCircleForm",
+        enable: true
+      });
+
+      ctx.commit("setCardNumber", fields.cardnumber.value);
+      ctx.commit("setCvv", fields.cvv.value);
+
+      await ctx.dispatch("generateEncryptedData");
+
+      const dataFields = {
+        api_key: ctx.getters.getKey,
+        email: ctx.getters.getEmail,
+        relictum: ctx.getters.getRelictum,
+        currency: ctx.getters.getCurrentGate.name,
+        sum: ctx.getters.getSelectedStep === 'buy' ? ctx.getters.getPaySumm : ctx.getters.getSellGetSumm,
+        expYear: fields.date.value.split("/")[1],
+        expMonth: fields.date.value.split("/")[0],
+        date: fields.date.value,
+        city: fields.city.value,
+        cardHolder: fields.cardHolder.value,
+        addressLine: fields.addressLine.value,
+        postalCode: fields.postalCode.value,
+        district: fields.district.value,
+        countryCode: fields.countryCode.value.value,
+        phone: fields.phone.value,
+        encryptedCard: ctx.getters.getEncryptedCard,
+        encryptedPayment: ctx.getters.getEncryptedPayment,
+        keyId: ctx.getters.getKeyId
+      }
+
+      axios.post(`${config.request}/api/v1/finance/buy`, dataFields).then(resp => {
+
+        if(!resp.data.success) {
+          if(resp.data.errors) {
+            const fs = Object.values(resp.data.errors);
+            ctx.commit("setError", fs[0][0]);
+          } else {
+            ctx.commit("setError", "Server Error");
+          }
+          return;
+        }
+
+        console.log(resp)
+
+        router.push({
+          query: {
+            statusid: resp.data.transaction.id
+          }
+        })
+        ctx.commit("setStep", 'status');
+      }).catch(err => {
+        console.error(err);
+        ctx.commit("setError", "Server Error");
+      }).finally(() => {
+        ctx.commit("setLoading", {
+          name: "sendCircleForm",
+          enable: false
+        });
+      }); 
+    }
 
   },
   mutations: {
@@ -115,9 +181,16 @@ export default {
     },
     setCardNumber(state, val) {
       state.cardNumber = val;
+    },
+    setCircleFormFields(state, val) {
+      state.circleFormFields = val;
     }
+
   },
   getters: {
+    getCircleFormFields(state) {
+      return state.circleFormFields;
+    },
     getCardNumber(state) {
       return state.cardNumber;
     },

@@ -27,7 +27,13 @@ export default {
           ctx.commit("setError", "Wrong address");
           return;
         }
-        if(resp.data.status && resp.data.success) ctx.dispatch("sendForm");
+        
+        if(ctx.getters.getCurrentGate.name !== 'USDC') {
+          ctx.dispatch("sendForm");
+        } else {
+          ctx.commit("setStep", 'card');
+        }
+        
       }).catch(err => {
         ctx.commit("setError", "Server error");
         console.error(err)

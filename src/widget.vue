@@ -37,6 +37,7 @@ export default {
     if(!this.apiKey) return;
     this.$store.commit("setKey", this.apiKey);
     this.$store.dispatch("fetchGates");
+
     if(this.$route.query.statusid) {
       this.step = 'status';
       if(this.$route.query.notify === 'simplex') this.notify = true;
@@ -52,11 +53,21 @@ export default {
       default: "modal"
     },
   },
+  computed: {
+    step: {
+      get() {
+        return this.$store.getters.getStep;
+      },
+      set(val) {
+        this.$store.commit("setStep", val);
+      }
+    }
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
-font_url = "http://dev.relictum.finance/fonts/"
+font_url = "https://dev.relictum.finance/assets/fonts/"
 
 @font-face
   font-family: "Cochin";

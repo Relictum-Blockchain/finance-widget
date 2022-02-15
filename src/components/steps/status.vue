@@ -22,7 +22,8 @@
                 animateTransform(attributeName='transform' type='rotate' repeatCount='indefinite' dur='1s' values='0 50 50;360 50 50' keyTimes='0;1')
             
             .status-page__status-title 
-              span(v-if="status !== 1") Ожидание оплаты...... 
+              span(v-if="status !== 1 && status !== 3") Ожидание оплаты...... 
+              span(v-else-if="status === 3") Ожидаем подтверждения оплаты...
               span(v-else) Успешно оплачено
             
             coutdown.status-page__status-counter(:time="tm" @timer="timer" v-if="!reboot_timer && status !== 1")
@@ -61,7 +62,7 @@
         .status-page__section.status-page__total(v-if="vData.sum")
           .status-page__caption 
             span(v-if="type === 1") 
-              span(v-if="status === 1 || status === 2") Вы заплатили
+              span(v-if="status === 1 || status === 2 || status === 3") Вы заплатили
               span(v-else) Сумма к оплате
             span(v-else) Вы получите
           .status-page__total-summ {{ vData.sum_currency }} {{ vData.gate.gateCurrency.code }}
@@ -73,7 +74,7 @@
           .status-page__caption Кошелек {{ vData.gate.gateCurrency.code }} для пополнения
           .status-page__value {{ vData.transaction_address }}
           
-        .status-page__section.status-page__actions(v-if="vData.transaction_address && type === 1 && status === 0")
+        .status-page__section.status-page__actions(v-if="vData.transaction_address && type === 1 && (status === 0 || status === 3)")
           a.copy-btn(:href="`https://tronscan.org/#/address/${vData.transaction_address}`" target="_blank" v-if="vData.gate.gateCurrency.code === 'USDT-TRX'")
             span Перейте в Tronscan
           a.copy-btn(:href="`https://etherscan.org/#/address/${vData.transaction_address}`" target="_blank" v-if="vData.gate.gateCurrency.code === 'USDT'")
@@ -96,7 +97,7 @@
               a.copy-btn(target="_blank" :href="`https://relictum.pro/explorer/main/address/${vData.data.relictum}`")  
                 span Перейти в explorer
             
-        .status-page__section(v-if="simplex && status === 0")
+        .status-page__section(v-if="simplex && (status === 0 || status === 3)")
           form(:action="simplex.action" method="POST")
             input(type="hidden" v-for="(val, key) in simplex.fields" :value="val" :name="key" v-if="key !== 'return_url_success' && key !== 'return_url_fail'")
             input(type="hidden" name="return_url_success" :value="currentUrl+'&forceStatus=1'")
@@ -104,17 +105,18 @@
             btn(type="submit" caption="Перейти к оплате")
             span.status-page__caption.status-page__caption_center.status-page__caption_semi Вы будете перенаправлены на страницу мерчанта
 
-        .status-page__footer(v-if="status === 0")
+        .status-page__section.status-page__footer(v-if="status === 0")
           b.status-page__footer-title Внимание
           ul.status-page__footer-list
             li Переведите на этот адрес только {{ vData.gate.gateCurrency.title }} <span v-if="vData.gate.data.networks">({{ vData.gate.data.networks[0] }})</span>. Если вы отправите на этот адрес другую криптовалюту, она может быть потеряна навсегда.
             li Сделка будет зачислена не ранее, чем после 3 сетевых подтверждений.
 
-        .status-page__footer-btn(v-if="status === 1")
-          a.status-page__clean-btn(href="https://relictum.finance/auth/signin" target="_blank")
+        .status-page__section.status-page__footer-btn(v-if="status === 1 || status === 3")
+          a.status-page__clean-btn(href="https://relictum.finance/cabinet/transactions" target="_blank")
             span История транзакций
 
-        .status-page__footer-btn(v-if="status === 2")
+
+        .status-page__section.status-page__footer-btn(v-if="status === 2 || status === 4")
           a.status-page__clean-btn(href="" @click.prevent="resetForm()" target="_blank")
             span Вернуться на главную
 
@@ -163,7 +165,7 @@ export default {
       return this.$store.getters.getStatusData ? this.vData.type : null
     },
     status() {
-      if(this.$route.query.forceStatus && this.vData.status === 0) return parseInt(this.$route.query.forceStatus);
+      if(this.$route.query.forceStatus && this.vData && this.vData.status === 0) return parseInt(this.$route.query.forceStatus);
       return this.$store.getters.getStatusData ? this.vData.status : null
     },
     simplex() {
