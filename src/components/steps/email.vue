@@ -103,34 +103,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus" scoped>
-.email-section
-  &__error
-    text-align center
-    display block
-    margin-bottom 10px
-    color #ff0000
-    font-size 14px
-  &__external
-    margin-bottom 20px
-  &__caption
-    display block
-    margin-bottom 15px
-    color #212f41
-  &__fields
-    margin-bottom 20px
-  &__info
-    margin-bottom 20px
-    background-color #f5f6f8
-    padding 20px
-    color #61677c
-    & > :last-child
-      margin-bottom 0
-    p
-      margin-bottom 20px
-    &-title
-      margin-bottom 25px
-      font-size 16px
-      color #000
-</style>

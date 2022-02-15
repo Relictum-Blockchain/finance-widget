@@ -1,0 +1,190 @@
+.fade-fs-enter-active, .fade-fs-leave-active
+  transition all 0.25s ease
+
+.fade-fs-enter, .fade-fs-leave-to
+  opacity 0
+  transform translateY(100%) scale(0)
+
+.finance-float div, .finance-float ul, .finance-float textarea 
+  ::-webkit-scrollbar-track
+    background-color transparent
+
+  ::-webkit-scrollbar-corner
+    background-color: #442738
+
+  ::-webkit-scrollbar-button
+    background-image url('')
+    background-repeat no-repeat
+    background-color #442738
+    width 0
+    height 0
+
+  ::-webkit-scrollbar-thumb
+    background-position center 
+    background-repeat no-repeat 
+    cursor pointer
+    background-color #442738
+    border-radius 10px
+    &:hover
+      background-color #000
+
+  ::-webkit-resizer 
+    background-image url('')
+    background-repeat no-repeat
+    width 4px
+    height 0
+    background-color: #999
+
+  ::-webkit-scrollbar
+    width 4px
+    height 4px
+    background-color transparent
+
+.finance-float
+  color #000
+  width 100%
+  &__close
+    position absolute
+    right -15px
+    background-color #4C2D38
+    width 32px
+    height 32px
+    border-radius 50%
+    border 0
+    top -15px
+    color #fff
+    display flex
+    z-index 2
+    align-items center
+    justify-content center
+    outline: none !important
+    cursor pointer
+    transition all 0.25s ease
+    box-shadow: 0 0 10px rgba(0,0,0,0.2)
+    svg
+      width 100%
+      height 100%
+    &:hover
+      background-color #F7931A
+      color #fff
+  &__typer
+    width 100%
+  &__widget
+    position fixed
+    right 0
+    top 0
+    width 100%
+    height 100%
+    overflow: auto
+    padding 20px
+    box-sizing: border-box
+    background-color #0f1630
+    background-image url("https://relictum.finance/assets/images/bg-buy_new.jpg")
+    background-size: cover
+    display flex
+    z-index 999
+    &-wrap
+      position relative
+      margin auto
+      max-width 432px
+      width 100%
+  &__bpos
+    position fixed
+    right 30px
+    bottom 30px
+    width 64px
+    height 64px
+    z-index 1000
+  &__button
+    width 64px
+    height 64px
+    background-color #fff
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.2)
+    display flex
+    align-items center
+    justify-content center
+    border 0
+    cursor pointer
+    border-radius 50%
+    transition all 0.25s ease
+    &-wrap
+      width 50px
+      height 50px
+      overflow hidden
+      img
+        height 50px
+        transition all 0.25s ease
+    &:hover, &.active
+      background-color #1167e7
+      color #fff
+      img
+        filter brightness(5) 
+    &.notify
+      animation bells 2s infinite
+
+@keyframes bells
+  0%
+    transform rotate(-5deg) translateX(-2px)
+  3%
+    transform rotate(5deg) translateX(2px)
+  6%
+    transform rotate(-5deg) translateX(-2px)
+  9%
+    transform rotate(5deg) translateX(2px)
+  12%
+    transform rotate(-5deg) translateX(-2px)
+  15%
+    transform rotate(5deg) translateX(2px)
+  18%
+    transform rotate(-5deg) translateX(-2px)
+  21%
+    transform rotate(5deg) translateX(2px)
+  24%
+    transform rotate(0deg) translateX(0px)
+
+.finance-widget
+  box-sizing border-box
+  max-width 432px
+  width 100%
+  min-height 492px
+  display flex
+  flex-direction column
+  margin-left auto
+  font-family "Sero Pro", sans-serif
+  font-weight 400
+  margin-right auto
+  position relative
+  font-size 14px
+  background-color #fff
+  border 1px solid #E2E5EA
+  margin auto
+  *
+    box-sizing: border-box
+  &__error
+    text-align center
+    display block
+    color #ff0000
+    padding 20px
+  &__content
+    padding 20px
+    flex-grow 1
+    display flex
+  &__head
+    display flex
+    &-btn
+      flex-grow 1
+      width 50%
+      transition all 0.25s ease
+      cursor pointer
+      border 0
+      font-size 17px
+      height 64px
+      font-weight 600
+      outline: none !important
+      text-shadow: none
+      background-color transparent
+      box-shadow inset 0px -1px 0px #E2E5EA
+      color #6167a6
+      &.active
+        color #1169e9
+        box-shadow: inset 0px -2px 0px #1169e9

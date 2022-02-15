@@ -23,25 +23,3 @@ export default {
   },
 };
 </script>
-
-<style lang="stylus" scoped>
-.loading
-  position absolute
-  left 0
-  top 0
-  width 100%
-  height 100%
-  display block
-  background-color alpha(#fff, 0.5)
-  display flex
-  align-items center
-  justify-content center
-  z-index 20
-  user-select: none
-  svg
-    width 100px !important
-    height 100px !important
-    position relative
-  &.transparent
-    background-color transparent
-</style>

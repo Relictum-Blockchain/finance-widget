@@ -1,0 +1,298 @@
+.copy-btn
+  box-sizing: border-box;
+  border-radius: 4px;
+  cursor pointer
+  background-color: #ECF3FD
+  padding: 7px 12px;
+  font-weight: 500;
+  font-size: 14px;
+  outline none !important
+  border 0
+  line-height 1.3
+  box-shadow: none
+  color: #1167e7;
+  text-decoration none
+  display: inline-block;
+  transition: 0.3s all ease;
+  transform: perspective(1px) translateZ(0);
+  &:hover
+    transform: scale(1.02) perspective(1px) translateZ(0);
+  &.done
+    background-color #9cd166
+    color #fff
+
+
+@keyframes loader
+  to
+    transform: rotate(360deg);
+
+.status-page-error
+  text-align center
+  color #ff0000
+  font-size 16px
+
+.status-page
+  color #212f41
+  &__ws-status
+    display block
+    text-align center
+    svg
+      margin-bottom 10px
+  &__clean-btn
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid #e2e5ea;
+    padding: 12px 20px
+    font-size: 16px;
+    color: #212f41;
+    text-align: center;
+    display block
+    width: 100%;
+    outline none !important
+    box-sizing: border-box;
+    transition: 0.3s all ease;
+    transform: perspective(1px) translateZ(0)
+    &:hover
+      transform: scale(1.02) perspective(1px) translateZ(0);
+  &__loader
+    position relative
+    font-size 35px
+    text-align center
+    display flex
+    align-items center
+    justify-content center
+    color #EF963E
+    width 140px
+    height 140px
+    margin-left auto
+    margin-right auto
+    margin-bottom 20px
+    &:before
+      width 140px
+      position absolute
+      left 0
+      top 0
+      height 140px
+      border-bottom 3px solid #EF963E
+      display block
+      animation loader 1s linear infinite
+      border-radius 50%
+      content: ''
+  &__center-caption
+    text-align center
+    font-family "Cochin", Arial, sans-serif
+    font-size 18px
+    display block
+  &__footer
+    margin-left -20px
+    margin-right -20px
+    padding-left 20px
+    padding-right 20px
+    &-title
+      font-size 20px
+      display block
+      font-family "Cochin", Arial, sans-serif
+    &-list
+      padding 0
+      margin-left 20px
+      font-size 13px
+      li
+        margin-bottom 10px
+        &:last-child
+          margin-bottom 0px
+  &__qr
+    text-align center
+    min-height 148px
+    img
+      display inline-block
+      width 148px
+      height 148px
+  &__transaction
+    margin-left -20px
+    margin-right -20px
+    background-color #f5f6f8
+    padding-left 20px
+    padding-right 20px
+  &__mt
+    margin-top 10px
+  &__cell
+    padding-top 15px
+    padding-bottom 15px
+    border-bottom 1px solid #E2E5EA
+    &:last-child
+      border-bottom 0
+  &__summ
+    font-weight 500
+    font-size 24px
+  &__actions
+    display flex
+    flex-wrap wrap
+    margin-bottom -12px
+    align-items flex-start
+    & > *
+      margin-right 12px
+      margin-bottom 12px
+  &__copy
+    margin-top 10px
+  &__caption
+    color #485d7d
+    font-size 14px
+    display block
+    margin-bottom 5px
+    &_semi
+      margin-top 5px
+      margin-bottom 0
+    &_center
+      text-align center
+  &__value
+    word-break: break-word;
+    color #212f41
+    font-size 16px
+    font-weight 700
+  &__section
+    margin-bottom 20px
+  &__total
+    text-align center
+    &-summ
+      font-size 30px
+      display block
+      color #212f41
+      .sell-status &
+        color #EF963E
+      .complete-status &, .error-status &, .sell-status &
+        font-weight 500
+        font-size 24px
+    .sell-status &
+      text-align left
+      border-bottom 1px solid #E2E5EA
+      padding-bottom 20px
+      margin-top 35px
+    .complete-status &, .error-status &
+      text-align left
+  &__info
+    display flex
+    align-items center
+    justify-content center
+    &-mid
+      display inline-flex
+      align-items center
+      flex-wrap wrap
+      text-align center
+      padding-left 34px
+      position relative
+      text-align left
+    &-img
+      width 24px
+      height 24px
+      border-radius 50%
+      overflow hidden
+      margin-right 10px
+      position absolute
+      left 0
+      top 50%
+      margin-top -13px
+      flex-shrink 0
+    &-title
+      font-weight 700
+      margin-right 10px
+      display block
+      font-size 16px
+    &-caption
+      color #999
+      font-size 14px
+  &__head
+    padding 0 20px 20px 20px
+    text-align center
+    font-size 20px
+    font-weight 700
+    position relative
+    display block
+    font-family "Cochin", Arial, sans-serif
+    .sell-status &
+      margin-bottom 20px
+      &:before
+        width calc(50% - 2px)
+        height 3px
+        background-color #ef963e
+        display block
+        position absolute
+        left 0
+        bottom 0
+        content ""
+      &:after
+        width calc(50% - 2px)
+        height 3px
+        background-color #E2E5EA
+        display block
+        position absolute
+        right 0
+        bottom 0
+        content ""
+    .error-status &
+      margin-bottom 20px
+      &:before
+        width calc(50% - 2px)
+        height 3px
+        background-color #ef963e
+        display block
+        position absolute
+        left 0
+        bottom 0
+        content ""
+      &:after
+        width calc(50% - 2px)
+        height 3px
+        background-color #ef963e
+        display block
+        position absolute
+        right 0
+        bottom 0
+        content ""
+  &__id
+    display block
+    text-align center
+    font-size 14px
+    margin-bottom 20px
+  &__status
+    margin-left -20px
+    margin-right -20px
+    position relative
+    display flex
+    margin-bottom 20px
+    background-color #ecf3fd
+    line-height 1
+    .complete-status &
+      color #fff
+      font-size 16px
+      font-weight 500
+    &-counter
+      margin-left auto
+    &-content
+      display flex
+      align-items center
+      padding 10px 20px
+      width 100%
+      position relative
+      z-index 2
+      min-height 44px
+      box-sizing: border-box
+    svg
+      width 25px
+      height 25px
+      margin-right 10px
+      margin-top -2px
+      .complete-status &
+        width 18px
+        height 16px
+    &-width
+      position absolute
+      left 0
+      transition width 0.1s ease
+      top 0
+      width 0px
+      height 100%
+      background-color #cddcf2
+      z-index 1
+      .complete-status &
+        width 100% !important
+        background-color #1167e7

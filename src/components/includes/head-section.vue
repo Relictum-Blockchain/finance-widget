@@ -34,35 +34,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus" scoped>
-  .head-section
-    display flex
-    align-items center
-    min-height 64px
-    margin-top -20px
-    margin-bottom 20px
-    margin-left -15px
-    margin-right -15px
-    &__btn
-      width 40px
-      height 40px
-      display flex
-      align-items center
-      justify-content center
-      text-align center
-      border 0
-      background-color transparent
-      cursor pointer
-      border-radius 50%
-      padding 0
-      margin 0
-      box-shadow: none
-      &:hover
-        background-color #1167e7
-        color #fff
-    &__title
-      text-align center
-      flex-grow 1
-      font-weight 700
-</style>

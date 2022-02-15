@@ -1,86 +1,81 @@
 <template lang="pug">
-  .finance-widget
-    loading(:on="$store.getters.getLoading")
-    .finance-widget__head(v-if="step === 'buy' || step === 'sell'")
-      button.finance-widget__head-btn(@click="step = 'buy'" :class="{'active': step === 'buy'}") Покупка
-      button.finance-widget__head-btn(@click="step = 'sell'" :class="{'active': step === 'sell'}") Продажа   
-    .finance-widget__content
-      dynamic-view
+  .finance-float(v-if="apiKey")
+    
+    .finance-float__typer(v-if="type === 'modal'")
+      .finance-float__bpos
+        button.finance-float__button(@click="open = !open, notify = false" :class="{'active': open, 'notify': notify}")
+          .finance-float__button-wrap
+            img(src="https://relictum.finance/assets/icons/relictum_finance.svg", alt="alt")
+      transition(name="fade-fs")
+        .finance-float__widget(v-if="open && type === 'modal'")
+          .finance-float__widget-wrap
+            button.finance-float__close(@click="open = false")
+              svg(style='enable-background:new 0 0 24 24;' version='1.1' viewBox='0 0 24 24' xml:space='preserve' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink')
+                path(d='M14.8,12l3.6-3.6c0.8-0.8,0.8-2,0-2.8c-0.8-0.8-2-0.8-2.8,0L12,9.2L8.4,5.6c-0.8-0.8-2-0.8-2.8,0   c-0.8,0.8-0.8,2,0,2.8L9.2,12l-3.6,3.6c-0.8,0.8-0.8,2,0,2.8C6,18.8,6.5,19,7,19s1-0.2,1.4-0.6l3.6-3.6l3.6,3.6   C16,18.8,16.5,19,17,19s1-0.2,1.4-0.6c0.8-0.8,0.8-2,0-2.8L14.8,12z' fill='currentColor')
+            widget
+    .finance-float__typer(v-else)
+      widget
+
+
 </template>
 
 <script>
-import DynamicView from "@/components/dynamicView"
-import loading from "@/components/includes/loading"
+import widget from "@/components/widget"
+
 export default {
   components: {
-    DynamicView, loading
+    widget
   },
+  data() {
+    return {
+      open: false,
+      notify: false
+    }
+  },
+  
   mounted() {
+    if(!this.apiKey) return;
+    this.$store.commit("setKey", this.apiKey);
     this.$store.dispatch("fetchGates");
-
-    if(this.$route.query.statusid) this.step = 'status';
-  },
-  watch: {
-    step: {
-      deep: true,
-      handler() {
-        this.$store.commit("setError", null);
-      }
+    if(this.$route.query.statusid) {
+      this.step = 'status';
+      if(this.$route.query.notify === 'simplex') this.notify = true;
     }
   },
-  computed: {
-    step: {
-      get() {
-        return this.$store.getters.getStep;
-      },
-      set(val) {
-        this.$store.commit("setStep", val);
-      }
-    }
-  }
-
+  props: {
+    apiKey: {
+      type: String,
+      default: ""
+    },
+    type: {
+      type: String,
+      default: "modal"
+    },
+  },
 }
 </script>
 
 <style lang="stylus" scoped>
-.finance-widget
-  box-sizing border-box
-  max-width 432px
-  min-height 492px
-  display flex
-  flex-direction column
-  margin-left auto
-  font-family Arial, sans-serif
-  margin-right auto
-  position relative
-  font-size 14px
-  background-color #fff
-  border 1px solid #E2E5EA
-  *
-    box-sizing: border-box
-  &__content
-    padding 20px
-    flex-grow 1
-    display flex
-  &__head
-    display flex
-    &-btn
-      flex-grow 1
-      width 50%
-      transition all 0.25s ease
-      cursor pointer
-      border 0
-      font-size 17px
-      height 64px
-      font-weight 600
-      outline: none !important
-      text-shadow: none
-      background-color transparent
-      box-shadow inset 0px -1px 0px #E2E5EA
-      color #6167a6
-      &.active
-        color #1169e9
-        box-shadow: inset 0px -2px 0px #1169e9
-  
+font_url = "http://dev.relictum.finance/fonts/"
 
+@font-face
+  font-family: "Cochin";
+  src: url(font_url+"Cochin-Bold.woff2") format("woff2"), url(font_url+"Cochin-Bold.woff") format("woff")
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+
+@font-face
+  font-family "Sero Pro"
+  src url(font_url+"SeroPro.woff2") format("woff2"), url(font_url+"SeroPro.woff") format("woff")
+  font-weight 400
+  font-style normal
+  font-display swap
+
+@font-face
+  font-family "Sero Pro"
+  src url(font_url+"SeroPro-Medium.woff2") format("woff2"), url(font_url+"SeroPro-Medium.woff") format("woff")
+  font-weight 500
+  font-style normal
+  font-display swap
 </style>

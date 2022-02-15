@@ -39,32 +39,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus" scoped>
-.buy-select
-  &__option
-    display flex
-    align-items center
-    &-img
-      width 24px
-      height 24px
-      border-radius 50%
-      flex-shrink 0
-      margin-right 10px
-      img
-        width 100%
-        height 100%
-    &-title 
-      display block
-      font-size 17px
-      line-height 1
-    &-caption
-      font-size 12px
-      display block
-      color #999
-      margin-top 3px
-      .multiselect__option--highlight &
-        color #fff
-  .multiselect__tags
-    border 0 !important
-</style>

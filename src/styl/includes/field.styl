@@ -1,0 +1,87 @@
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .field
+    position relative
+    width 100%
+    box-sizing: border-box
+    *
+      box-sizing: border-box
+    &.smart
+      & ^[0]__input
+        font-size 19px
+    &.hidden
+      width 1px
+      height 1px
+      overflow hidden
+      opacity 0
+      position absolute
+      display block
+    &__wrap
+      position relative
+    &__input
+      width 100%
+      border 1px solid #D3D9E2
+      height 74px
+      margin 0
+      background-color #fff
+      color #000
+      outline: none !important
+      padding-left 20px
+      font-size 24px
+      padding-right 20px
+      appearance: none !important
+      -webkit-appearance none !important
+      padding-top 24px
+      border-radius 3px
+      padding-bottom 7px
+      -moz-appearance textfield !important
+      .field_slot &
+        padding-right 190px
+    &__label
+      position absolute
+      left 0
+      top 0
+      pointer-events: none
+      padding-left 20px
+      font-size 14px
+      padding-top 10px
+      color #999
+    &__slot
+      position absolute
+      right 10px
+      bottom 10px
+    &:not(.vs)
+      .multiselect 
+        margin-left -20px
+        margin-right -20px
+        width calc(100% + 40px)
+        margin-top 5px
+      .multiselect__tags
+        border 0
+        padding-left 14px
+      .multiselect__option
+        padding-left 20px
+        padding-right 20px
+      .multiselect__content-wrapper
+        margin-left -1px
+        margin-right -1px
+        width calc(100% + 2px)
+        box-shadow: 0 0 10px rgba(0,0,0,0.1)
+      .multiselect__single, .multiselect__input
+        font-size 19px
+      .multiselect__placeholder
+        font-size 19px
+        padding-left: 5px;
+        margin-bottom: 8px;
+        min-height: 20px;
+        vertical-align top
+        display inline-block
+        box-sizing: border-box;
+        border 0
+        width 100%
+        padding-top 0
+        line-height: 20px;

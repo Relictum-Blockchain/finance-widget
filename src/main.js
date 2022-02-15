@@ -5,26 +5,29 @@ import multiselect from "vue-multiselect"
 import field from "@/components/includes/field"
 import btn from "@/components/includes/btn"
 import headSection from "@/components/includes/head-section"
-import VueJsonPretty from 'vue-json-pretty'
 import router from '@/router'
-import "@/styl/main.styl"
+import vueCustomElement from 'vue-custom-element'
+import config from "@/config"
+// import ""
+import componentStyles from '!!raw-loader!stylus-loader!@/styl/main.styl';
 
 Vue.component("field", field);
 Vue.component("multiselect", multiselect);
 Vue.component("btn", btn);
 Vue.component("head-section", headSection);
 
-// Demo to remove
-Vue.component("jp", VueJsonPretty);
-import 'vue-json-pretty/lib/styles.css'
-
-
 Vue.config.productionTip = false
 
-Vue.prototype.$domain = "https://relictum.finance";
+Vue.prototype.$domain = config.domain;
 
-new Vue({
-  store,
-  router,
-  render: h => h(widget),
-}).$mount('#app')
+Vue.use(vueCustomElement)
+
+widget.store = store
+widget.router = router
+
+Vue.customElement('finance-widget', widget, {
+  shadow: true,
+  shadowCss: componentStyles
+})
+
+// , {shadow: true}

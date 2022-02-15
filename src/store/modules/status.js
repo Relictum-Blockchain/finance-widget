@@ -3,51 +3,46 @@ import config from "@/config"
 
 export default {
   state: {
-    email: null,
+    statusData: null
   },
   actions: {
-    checkEmail(ctx, email) {
+    checkStatus(ctx, id) {
       ctx.commit("setLoading", {
-        name: "emailChecker",
+        name: "statusChecker",
         enable: true
       });
-      ctx.commit("setRelictum", null);
-      ctx.commit("setError", null);
-      axios.get(`${config.request}/api/v1/user/get-relictum?email=${email}`).then(resp => {
 
+      ctx.commit("setError", null);
+      axios.get(`${config.request}/api/v1/finance/status?id=${id}`).then(resp => {
         if(!resp || !resp.data) {
           console.error(resp)
           ctx.commit("setError", "Server Error");
           return;
         }
-
         if(!resp.data.success) {
-          ctx.commit("setError", "Wrong email");
+          ctx.commit("setError", "Server Error");
           return;
         }
-
-        if(resp.data.relictum) ctx.commit("setRelictum", resp.data.relictum);
-        if(resp.data.success) ctx.commit("setStep", 'relictum');
-
+        ctx.commit("setStatusData", resp.data);
       }).catch(err => {
         console.error(err)
         ctx.commit("setError", "Server Error");
       }).finally(() => {
         ctx.commit("setLoading", {
-          name: "emailChecker",
+          name: "statusChecker",
           enable: false
         });
-      })
+      });
     },
   },
   mutations: {
-    setEmail(state, email) {
-      state.email = email;
+    setStatusData(state, val) {
+      state.statusData = val;
     },
   },
   getters: {
-    getEmail(state) {
-      return state.email;
+    getStatusData(state) {
+      return state.statusData;
     },
   }
 }

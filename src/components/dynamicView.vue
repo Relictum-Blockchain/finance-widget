@@ -9,6 +9,7 @@ import sell from "@/components/steps/sell"
 import email from "@/components/steps/email"
 import relictum from "@/components/steps/relictum"
 import status from "@/components/steps/status"
+import card from "@/components/steps/card"
 
 export default {
   components: {
@@ -16,7 +17,8 @@ export default {
     sell,
     email,
     relictum,
-    status
+    status,
+    card
   },
   computed: {
     step: {
@@ -30,16 +32,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus" scoped>
-  .finance-content
-    display flex
-    box-sizing: border-box
-    height 100%
-    position relative
-    width 100%
-    &__section
-      width 100%
-      flex-shrink 0
-      box-sizing: border-box
-</style>
