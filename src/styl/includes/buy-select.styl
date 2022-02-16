@@ -19,6 +19,28 @@
       font-size 12px
       display block
       color #999
+      line-height 1.1
       margin-top 3px
       .multiselect__option--highlight &
         color #fff
+
+@media (max-width 400px)
+  .buy-select
+    max-width 150px !important
+    &__option
+      &-title 
+        font-size 15px
+      &-img
+        width 20px
+        height 20px
+        margin-right 7px
+
+    .multiselect__tags
+      padding: 8px 20px 0 5px;
+    .multiselect__select
+      right -4px
+    .multiselect__input
+      font-size 12px
+    .multiselect__option
+      padding-left 8px
+      padding-right 8px

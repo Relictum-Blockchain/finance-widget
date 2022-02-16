@@ -93,7 +93,7 @@
 
           district: {
             value: null,
-            label: "Дистрикт",
+            label: "Дистрикт (Штат или Область)",
             type: "text",
             error: false,
             pattern: ".{0,70}",
@@ -131,19 +131,8 @@
         let fs = true;
         for(let field in this.fields) {
           if(!this.fields[field].pattern) return;
-
-          // const dstr = this.fields[field].name === 'district';
           const field_rule = (!new RegExp(this.fields[field].pattern).test(this.fields[field].value) || !this.fields[field].value || this.fields[field].value === "");
-          //  && !dstr
-          
-          // let district_rule = false;
-          // if(dstr && !this.fields.countryCode.value) district_rule = true;
-          // if(dstr && (!this.fields.countryCode.value || this.fields.countryCode.value.value === 'CA' || this.fields.countryCode.value.value === 'US') && !this.fields.district.value) district_rule = true;
-          // && district_rule
-          if(field_rule) {
-            fs =  false;
-          }
-          
+          if(field_rule) fs =  false;
         }
         return fs;
       }

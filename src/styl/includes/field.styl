@@ -87,3 +87,17 @@
         width 100%
         padding-top 0
         line-height: 20px;
+
+@media (max-width 400px)
+  .field
+    &__input
+      padding-left 15px
+      .field_slot &
+        padding-right 150px
+    &__label
+      padding-left 15px
+    &:not(.vs) 
+      .multiselect
+        margin-left: -15px;
+        margin-right: -15px;
+        width: calc(100% + 30px);
