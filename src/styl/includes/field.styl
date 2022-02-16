@@ -41,14 +41,19 @@
       -moz-appearance textfield !important
       .field_slot &
         padding-right 190px
+        .ab-lang &
+          padding-left 190px
+          padding-right 20px
       .error-field &
         border-color #ff0000
     &__label
       position absolute
       left 0
+      width 100%
       top 0
       pointer-events: none
       padding-left 20px
+      padding-right 20px
       font-size 14px
       padding-top 10px
       color #999
@@ -56,6 +61,9 @@
       position absolute
       right 10px
       bottom 10px
+      .ab-lang &
+        right auto
+        left 10px
     &:not(.vs)
       .multiselect 
         margin-left -20px
@@ -94,6 +102,9 @@
       padding-left 15px
       .field_slot &
         padding-right 150px
+        .ab-lang &
+          padding-left 150px
+          padding-right 15px
     &__label
       padding-left 15px
     &:not(.vs) 

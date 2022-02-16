@@ -2,12 +2,17 @@
   &__option
     display flex
     align-items center
+    .ab-lang &
+      text-align right
     &-img
       width 24px
       height 24px
       border-radius 50%
       flex-shrink 0
       margin-right 10px
+      .ab-lang &
+        margin-right 0
+        margin-left 10px
       img
         width 100%
         height 100%
@@ -34,6 +39,9 @@
         width 20px
         height 20px
         margin-right 7px
+        .ab-lang &
+          margin-right 0
+          margin-left 7px
 
     .multiselect__tags
       padding: 8px 20px 0 5px;

@@ -1,20 +1,20 @@
 <template lang="pug">
   .email-section(v-if="currentGate")
-    head-section(title="Введите ваш email адрес" :to="selectedStep")
-    .email-section__caption Введите вашу информацию
+    head-section(:title="$t('enter_email_title')" :to="selectedStep")
+    .email-section__caption {{ $t("enter_information")}}
     .email-section__fields
-      field(label="Ваш email"  required="required" cls="smart" placeholder="example@gmail.com" v-model="email" type="email")
+      field(:label="$t('your_email')"  required="required" cls="smart" placeholder="example@gmail.com" v-model="email" type="email")
     .email-section__external(v-for="li in currentGate.info.data.external_fields")
       field(:label="li.title" :required="li.required" :validate="li.pattern" cls="smart" :placeholder="li.placeholder" v-model="fields[li.field_name]" :type="li.type")
     .email-section__info
-      b.email-section__info-title Информация о пользователе
-      p Мы не продаем и не передаем ваши личные данные третьим лицам без вашего предварительного согласия.
-      p Все операции выполняются в соответствии с Политикой конфиденциальности и предусматривают ее соблюдение по всем пунктам.
+      b.email-section__info-title {{ $t("user_information") }}
+      p {{ $t("we_not_send_information") }}
+      p {{ $t("politics_infomation") }}
     transition(name="fade")
       .email-section__error(v-if="error")
         span {{ error }}
     .email-section__button
-      btn(caption="Продолжить" :disabled="buttonValidate" @click.native="sendEmail()")
+      btn(:caption="$t('proceed')" :disabled="buttonValidate" @click.native="sendEmail()")
 </template>
 
 <script>

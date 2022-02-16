@@ -1,5 +1,5 @@
 <template lang="pug">
-  multiselect.buy-select(v-if="gates.length" v-model="currentGate" placeholder="Выберите вариант" track-by="name" label="name" :show-labels="false" :options="gates" :allow-empty="false")
+  multiselect.buy-select(v-if="gates.length" v-model="currentGate" :placeholder="$t('choose_option')" track-by="name" label="name" :show-labels="false" :options="gates" :allow-empty="false")
     template(slot="singleLabel", slot-scope="{ option }")
       .buy-select__option
         .buy-select__option-img

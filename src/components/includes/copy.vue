@@ -18,11 +18,15 @@ export default {
     },
     copyText: {
       type: String,
-      default: 'Скопировать'
+      default() {
+        return this.$t('copy')
+      } 
     },
     doneText: {
       type: String,
-      default: 'Скопировано'
+      default()  {
+        return this.$t('copied')
+      }
     }
   },
   methods: {

@@ -1,6 +1,6 @@
 <template lang="pug">
   .card-pay
-    head-section(title="Заполните данные карты" to="relictum")
+    head-section(:title="$t('fill_card_data')" to="relictum")
     .card-pay__cell(v-for="field in fields"  :class="{[field.cls]: field.cls, 'hidden': field.type == 'hidden'}" )
       //- v-if="computedDistrict(field.name)"
       field(v-model="field.value" :options="field.list" :label="field.label" cls="smart" :type="field.type" :placeholder="field.placeholder" :validate="field.pattern" :mask="field.mask" :error="field.error" @validUpdate="clearField(field)")
@@ -8,7 +8,7 @@
       .error-field
         span {{ error }}
     .card-pay__cell
-      btn(caption="Принять и продолжить" cls="full" :disabled="!validationTest" @click.native="sendCard()")
+      btn(:caption="$t('accept_next')" cls="full" :disabled="!validationTest" @click.native="sendCard()")
 </template>
 
 <script>
@@ -18,7 +18,7 @@
         fields: {
           cardnumber: {
             value: null,
-            label: "Номер карты",
+            label: this.$t('card_number'),
             type: "text",
             error: false,
             placeholder: "0000 0000 0000 0000",
@@ -29,7 +29,7 @@
 
           cvv: {
             value: null,
-            label: "CVV",
+            label: this.$t('cvv'),
             type: "password",
             error: false,
             placeholder: "***",
@@ -42,7 +42,7 @@
             value: null,
             error: false,
             type: "text",
-            label: "ФИО Владельца карты",
+            label: this.$t('card_holder'),
             placeholder: "Ivan Ivanovich",
             pattern: ".{3,100}",
             name: "cardHolder",
@@ -51,7 +51,7 @@
 
           date: {
             value: null,
-            label: "Дата окончания",
+            label: this.$t('expiration_date'),
             type: "text",
             placeholder: "00/0000",
             error: false,
@@ -63,7 +63,7 @@
 
           addressLine: {
             value: null,
-            label: "Адрес",
+            label: this.$t('address'),
             type: "text",
             placeholder: "My Home Street h24, ap37",
             error: false,
@@ -73,7 +73,7 @@
 
           city: {
             value: null,
-            label: "Город",
+            label: this.$t('city'),
             type: "text",
             error: false,
             pattern: ".{3,70}",
@@ -83,7 +83,7 @@
 
           postalCode: {
             value: null,
-            label: "Код города",
+            label: this.$t('postal_code'),
             type: "number",
             error: false,
             pattern: ".{3,20}",
@@ -93,7 +93,7 @@
 
           district: {
             value: null,
-            label: "Дистрикт (Штат или Область)",
+            label: this.$t("district"),
             type: "text",
             error: false,
             pattern: ".{0,70}",
@@ -102,16 +102,17 @@
 
           countryCode: {
             value: null,
-            label: "Страна",
-            placeholder: "Выберите страну",
+            label: this.$t("country"),
+            placeholder: this.$t("choose_country"),
             type: "select",
             pattern: ".{1,10}",
             name: "countryCode",
             list: []
           },
+          
           phone: {
             value: null,
-            label: "Телефон",
+            label: this.$t('phone'),
             type: "text",
             error: false,
             pattern: ".{6,20}",

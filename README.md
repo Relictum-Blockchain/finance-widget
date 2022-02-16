@@ -1,24 +1,18 @@
-# widget-finance
+# Widge Finance
 
-## Project setup
-```
-yarn install
-```
+![screen png](screen.png "Title")
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Install 
 
-### Compiles and minifies for production
+Just include tags in any part of html page
+
 ```
-yarn build
+<finance-widget api-key="RELICTUM_FINANCE" type="widget"></finance-widget>
+<script src="https://scriptpath"></script>
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+## Options
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- `api-key`: your relictum finance widget api key
+- `type`: widget including type, have two parametres - `widget` and `modal`
+- `lang`: widget language `ru`, `en`, `vi`, `ab`, `in`

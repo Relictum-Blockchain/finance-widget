@@ -1,8 +1,8 @@
 <template lang="pug">
   .buy-section(v-if="currentGate")
-    .buy-section__caption Продажа USDR за Фиат и Криптовалюту
+    .buy-section__caption {{ $t('sell_usdr_for') }}
     .buy-section__cell
-      field(v-model="pay" @input="payFieldMethod"  type="number" placeholder="0" label="Вы продаете")
+      field(v-model="pay" @input="payFieldMethod"  type="number" placeholder="0" :label="$t('you_selling')")
         usdr-token
 
     .buy-section__cell.buy-section__cell_center
@@ -12,29 +12,28 @@
             path(d="M10859.5-6482.134l0,0-5.5-5.5,1.376-1.373,4.124,4.125,4.125-4.125,1.375,1.373-5.494,5.5Z" transform="translate(-10729.25 7322)" fill="#1167e7")
           rect(width="2" height="10" transform="translate(490 875)" fill="#1167e7")
     .buy-section__cell
-      field(v-model="get" placeholder="0" type="number" @input="getFieldMethod" label="Вы получаете")
+      field(v-model="get" placeholder="0" type="number" @input="getFieldMethod" :label="$t('you_getting')")
         gate-select(:gates="gates" v-model="currentGate")
-      
 
     .buy-section__cell
       .buy-section__flist
         .buy-section__flist-cell(v-if="currentGate.info.data.percent_fee || currentGate.info.data.min_fee")
-          span.buy-section__flist-left Комиссия
+          span.buy-section__flist-left {{ $t('fee') }}
           span.buy-section__flist-right
             span(v-if="currentGate.info.data.percent_fee && currentGate.info.data.percent_fee > 0") <b>{{ currentGate.info.data.percent_fee }}% </b>
-            span(v-if="currentGate.info.data.percent_fee && currentGate.info.data.min_fee")  но не менее
+            span(v-if="currentGate.info.data.percent_fee && currentGate.info.data.min_fee") {{ $t('not_less') }}
             span(v-if="currentGate.info.data.min_fee && currentGate.info.data.min_fee > 0") <b> {{ currentGate.info.data.min_fee }} {{ currentGate.name }}</b>
         .buy-section__flist-cell
-          span.buy-section__flist-left Цена
-          span.buy-section__flist-right {{ currentGate.info.rate }} {{ currentGate.name }} за 1 USDR
+          span.buy-section__flist-left {{ $t('price') }}
+          span.buy-section__flist-right {{ currentGate.info.rate }} {{ currentGate.name }} {{ $t('for') }} 1 USDR
         .buy-section__flist-cell(v-if="currentGate.info.min_sum")
-          span.buy-section__flist-left Минимум
+          span.buy-section__flist-left {{ $t("minimum") }}
           span.buy-section__flist-right {{ currentGate.info.min_sum }} USDR
         .buy-section__flist-cell(v-if="currentGate.info.max_sum")
-          span.buy-section__flist-left Максимум
+          span.buy-section__flist-left {{ $t("maximum") }}
           span.buy-section__flist-right {{ currentGate.info.max_sum }} USDR
     .buy-section__button
-      btn(:caption="`Продажа USDR за ${currentGate.name}`" :disabled="buttonValidate" @click.native="step = 'email', selectedStep = 'sell'")
+      btn(:caption="`${$t('sell_usdr_for_ff')} ${currentGate.name}`" :disabled="buttonValidate" @click.native="step = 'email', selectedStep = 'sell'")
 </template>
 
 <script>
@@ -66,8 +65,8 @@ export default {
 
     computedError() {
       let compError = "";
-      if(this.pay && this.pay > this.currentGate.info.max_sum) compError = "Максимальная сумма продажи не должна превышать <br>" + this.currentGate.info.max_sum + " USDR";
-      if(this.pay && this.pay > 0 && this.pay < this.currentGate.info.min_sum) compError = "Минимальная сумма продажи не должна быть меньше <br>" + this.currentGate.info.min_sum + " USDR";
+      if(this.pay && this.pay > this.currentGate.info.max_sum) compError = this.$t('max_selling_summ_info') + " <br>" + this.currentGate.info.max_sum + " USDR";
+      if(this.pay && this.pay > 0 && this.pay < this.currentGate.info.min_sum) compError = this.$t('min_selling_summ_info') + " <br>" + this.currentGate.info.min_sum + " USDR";
       return compError;
     },
     pay: {

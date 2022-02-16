@@ -3,8 +3,8 @@
     loading(:on="$store.getters.getLoading")
     .finance-widget__box
       .finance-widget__head(v-if="step === 'buy' || step === 'sell'")
-        button.finance-widget__head-btn(@click="step = 'buy'" :class="{'active': step === 'buy'}") Покупка
-        button.finance-widget__head-btn(@click="step = 'sell'" :class="{'active': step === 'sell'}") Продажа   
+        button.finance-widget__head-btn(@click="step = 'buy'" :class="{'active': step === 'buy'}") {{ $t('h_buying') }}
+        button.finance-widget__head-btn(@click="step = 'sell'" :class="{'active': step === 'sell'}") {{ $t('h_selling') }}    
       .finance-widget__content
         dynamic-view
 </template>

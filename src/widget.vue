@@ -1,5 +1,5 @@
 <template lang="pug">
-  .finance-float(v-if="apiKey")
+  .finance-float(v-if="apiKey" :class="{'ab-lang': $i18n.locale === 'ab'}")
     
     .finance-float__typer(v-if="type === 'modal'")
       .finance-float__bpos
@@ -32,11 +32,17 @@ export default {
       notify: false
     }
   },
-  
+  watch: {
+    lang(val) {
+      this.$i18n.locale = val;
+    }
+  },
   mounted() {
     if(!this.apiKey) return;
     this.$store.commit("setKey", this.apiKey);
     this.$store.dispatch("fetchGates");
+
+    this.$i18n.locale = this.lang;
 
     if(this.$route.query.statusid) {
       this.step = 'status';
@@ -52,6 +58,10 @@ export default {
       type: String,
       default: "modal"
     },
+    lang: {
+      type: String,
+      default: "en"
+    }
   },
   computed: {
     step: {
