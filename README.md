@@ -1,4 +1,4 @@
-# Widge Finance
+# Widget Finance
 
 ![screen png](screen.png "Title")
 
