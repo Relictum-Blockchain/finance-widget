@@ -34,15 +34,17 @@ export default {
   },
   watch: {
     lang(val) {
-      this.$i18n.locale = val;
+      if(this.$i18n) this.$i18n.locale = val;
     }
   },
   mounted() {
+
     if(!this.apiKey) return;
+    
+    this.lang ? this.$i18n.locale = this.lang : "en";
+
     this.$store.commit("setKey", this.apiKey);
     this.$store.dispatch("fetchGates");
-
-    this.$i18n.locale = this.lang;
 
     if(this.$route.query.statusid) {
       this.step = 'status';
